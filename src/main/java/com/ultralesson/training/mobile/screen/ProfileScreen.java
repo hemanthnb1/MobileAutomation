@@ -9,6 +9,8 @@ public class ProfileScreen {
     }
 
     public User getProfileDetails() {
+
+
         return new User();
     }
 }
