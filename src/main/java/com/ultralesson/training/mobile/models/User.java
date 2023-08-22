@@ -4,16 +4,19 @@ public class User {
     private String email;
     private String password;
     private String fullName;
-    private String mobile;
     private String membershipStartDate;
 
     public User() {}
 
-    public User(String email, String password, String fullName, String mobileNumber) {
+    public User(String email, String password, String fullName) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
-        this.mobile = mobileNumber;
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public String getEmail() {
@@ -40,13 +43,6 @@ public class User {
         this.fullName = fullName;
     }
 
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
 
     public String getMembershipStartDate() {
         return membershipStartDate;
