@@ -2,6 +2,7 @@ package com.ultralesson.training.mobile.screen;
 
 import com.ultralesson.training.mobile.models.User;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.By;
 
 public class SignupScreen {
     private AppiumDriver appiumDriver;
