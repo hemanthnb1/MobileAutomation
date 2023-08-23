@@ -7,6 +7,7 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +26,12 @@ public class DriverCreator {
 //        Platform platform = desiredCapabilities.getPlatformName();
         Platform platform = desiredCapabilities.getPlatform();
         DriverManager<AppiumDriver> mobileDriverManager = getDeviceManagers().get(platform);
-        return new MobileDriverContext(mobileDriverManager).create(desiredCapabilities);
+        URL url = serverManagerThreadLocal.get().start();
+        AppiumDriver appiumDriver =
+                new MobileDriverContext(mobileDriverManager).create(url, desiredCapabilities);
+        appiumDriverThreadLocal.set(appiumDriver);
+        return appiumDriverThreadLocal.get();
+//        return new MobileDriverContext(mobileDriverManager).create(desiredCapabilities);
     }
 
     // Build a Device Managers Map
@@ -34,6 +40,11 @@ public class DriverCreator {
         driverManagerMap.put(Platform.ANDROID, new AndroidDriverManager());
         driverManagerMap.put(Platform.IOS, new IOSDriverManager());
         return driverManagerMap;
+    }
+
+    public void destroy() {
+        serverManagerThreadLocal.get().stop();
+        appiumDriverThreadLocal.get().quit();
     }
 
 }

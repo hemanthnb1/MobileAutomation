@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class AndroidDriverManager implements DriverManager<AppiumDriver> {
     @Override
-    public AppiumDriver create(DesiredCapabilities desiredCapabilities) throws MalformedURLException {
-        return new AndroidDriver(new URL("http://localhost:4723/wd/hub"),desiredCapabilities);
+    public AppiumDriver create(URL serverURL,DesiredCapabilities desiredCapabilities) throws MalformedURLException {
+        return new AndroidDriver(serverURL,desiredCapabilities);
     }
 }

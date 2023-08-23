@@ -17,6 +17,16 @@ dependencies {
     implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
 }
 
+    task runMobileTests(type: Test) {
+        outputs.upToDateWhen { false }
 test {
     useTestNG()
+    testLogging.showStandardStreams = true
+    useDefaultListeners = true
+    outputDirectory = file("$buildDir/mobile-reports")
 }
+        tasks.withType(Test) {
+            systemProperties System.properties
+        }
+
+    }
